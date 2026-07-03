@@ -201,14 +201,25 @@
   .creator-card.show{ display:flex; }
   .creator-info h4{ font-size:1.05rem; margin-bottom:4px; }
   .creator-info span{ font-family: var(--font-mono); font-size:0.75rem; color: var(--text-dim); }
+  
+  .card-actions{
+    display:flex; gap:10px; flex-wrap:wrap;
+  }
+
   .info-btn{
+    display: inline-flex; align-items: center; justify-content: center;
     font-family: var(--font-mono); font-size:0.78rem; letter-spacing:0.05em;
     background: var(--violet-bright); color: var(--void-deep); border:none;
     padding: 11px 20px; border-radius:8px; font-weight:600; cursor:pointer;
+    text-decoration: none; text-transform: uppercase;
     transition: transform 0.12s, box-shadow 0.12s;
   }
   .info-btn:hover{ transform: translateY(-1px); box-shadow: 0 6px 18px rgba(183,148,246,0.35); }
   .info-btn:focus-visible{ outline:2px solid var(--text); outline-offset:2px; }
+  
+  .info-btn.download-style {
+    background: var(--sheriff-blue);
+  }
 
   /* full screen overlay */
   .overlay{
@@ -367,7 +378,9 @@
           <h4>SleepyXD</h4>
           <span>MM2 · Small Creator</span>
         </div>
-        <button class="info-btn" data-overlay="sleepyxd">More Info</button>
+        <div class="card-actions">
+          <button class="info-btn" data-overlay="sleepyxd">More Info</button>
+        </div>
       </div>
 
       <div class="creator-card" id="illusionary-card">
@@ -375,7 +388,11 @@
           <h4>Illusionary</h4>
           <span>MM2 · Small Creator</span>
         </div>
-        <button class="info-btn" data-overlay="illusionary">More Info</button>
+        <div class="card-actions">
+          <!-- Fixed GitHub Download Link -->
+          <a class="info-btn download-style" href="https://raw.githubusercontent.com/chrisw81114-spec/PurpleTGGT-FanArtSite/main/Arts/FanArtTo_lllusion.exe" download="FanArtTo_lllusion.exe">Download Art</a>
+          <button class="info-btn" data-overlay="illusionary">More Info</button>
+        </div>
       </div>
     </div>
   </section>
@@ -460,7 +477,7 @@
   });
 
   // Info buttons -> overlay
-  document.querySelectorAll('.info-btn').forEach(btn => {
+  document.querySelectorAll('.info-btn[data-overlay]').forEach(btn => {
     btn.addEventListener('click', () => {
       document.getElementById('overlay-' + btn.dataset.overlay).classList.add('show');
     });
